@@ -25,4 +25,14 @@ class ActionDispatch::IntegrationTest
                                           password: password,
                                           remember_me: remember_me } }
   end
+
+  def log_out()
+    delete logout_path
+  end
+
+  def log_in_incorrectly_as(user, password: 'password', remember_me: '1')
+    post login_path, params: { session: { email: user.email,
+                                          password: "a",
+                                          remember_me: remember_me } }
+  end
 end
