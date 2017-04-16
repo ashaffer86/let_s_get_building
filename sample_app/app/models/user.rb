@@ -34,10 +34,11 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-  def authenticated?(remember_token)
-    return false if self.remember_digest.nil?
-    BCrypt::Password.new(self.remember_digest).is_password?(remember_token)
-    #I'm curious whether this would also work....self.remember_digest == User.digest(remember_token)
+  def authenticated?(attribute, token)
+    digest = self.send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+    #means the digest is equal to the token when converted to a digest
   end
 
   private
