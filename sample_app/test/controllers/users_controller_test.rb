@@ -23,6 +23,16 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_not @other_user.reload.admin?
   end
 
+  test "should redirect following when not logged in" do
+    get following_user_path(@user)
+    assert_redirected_to login_url
+  end
+
+  test "should redirect followers when not logged in" do
+    get followers_user_path(@user)
+    assert_redirected_to login_url
+  end
+
   #I don't understand.....these tests simply aren't working.......
   #!!!!!!!!!!!!!!!!!!!!!!
   #test "should redirect destroy when not logged in" do

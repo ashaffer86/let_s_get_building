@@ -23,7 +23,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
 
     #test stats
     @user.follow(users(:archer))
-    @user.follow(users(:lana))
+    #@user.follow(users(:lana))
     users(:lana).follow(@user)
     users(:lana).reload
     @user.reload
